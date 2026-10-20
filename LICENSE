@@ -1,0 +1,44 @@
+AccessLumens MCP Server License
+
+Copyright (c) 2026 AccessLumens. All rights reserved.
+
+This license covers the @accesslumens/mcp package (the "Software").
+
+1. Permission to use. You may install and run the Software, free of charge,
+   for any personal, commercial or non-commercial purpose, including scanning
+   websites and applications that you or your clients own or are authorised
+   to test.
+
+2. Restrictions. You may not:
+   a. sell, sublicense, rent or redistribute the Software, in whole or in
+      part, except by pointing others to the official npm package;
+   b. modify, decompile, reverse engineer or extract the scanning engine to
+      build a competing product or service;
+   c. offer the Software, or a service substantially built on it, to third
+      parties as a hosted or managed service;
+   d. remove or alter this license or any copyright notice.
+
+3. Scan results. The reports and findings the Software produces for you are
+   yours to use, share and publish as you wish.
+
+4. Third-party components. The Software depends on separately installed
+   packages (including axe-core, Playwright, the Model Context Protocol SDK
+   and zod). Each is governed by its own license, and nothing here changes
+   those licenses.
+
+5. No warranty. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+   KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+   Automated checks find only some accessibility issues, and a passing result
+   is not a guarantee of WCAG, ADA, EAA or any other legal conformance.
+
+6. Limitation of liability. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+   HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+   ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+   CONNECTION WITH THE SOFTWARE OR THE USE OF OR OTHER DEALINGS IN THE
+   SOFTWARE.
+
+7. Termination. This license ends automatically if you break its terms. On
+   termination you must stop using the Software and delete your copies.
+
+Questions: support@accesslumens.com

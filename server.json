@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.accesslumens/mcp",
+  "title": "AccessLumens",
+  "description": "Free WCAG accessibility checks for any page, including localhost, with fix guidance for each issue.",
+  "websiteUrl": "https://accesslumens.com/?utm_source=mcp-registry&utm_medium=listing",
+  "icons": [
+    {
+      "src": "https://accesslumens.com/icon.png",
+      "mimeType": "image/png",
+      "sizes": ["256x256"]
+    }
+  ],
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@accesslumens/mcp",
+      "version": "0.1.0",
+      "runtimeHint": "npx",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}

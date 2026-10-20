@@ -1,0 +1,39 @@
+name: Docker image
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-and-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: docker build -t accesslumens-mcp .
+
+      - name: Lists its tools and prompts
+        run: |
+          printf '%s\n' \
+            '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"1"}}}' \
+            '{"jsonrpc":"2.0","method":"notifications/initialized"}' \
+            '{"jsonrpc":"2.0","id":2,"method":"tools/list"}' \
+            '{"jsonrpc":"2.0","id":3,"method":"prompts/list"}' \
+            | timeout 60 docker run -i --rm accesslumens-mcp > out.jsonl
+          grep -q '"check_accessibility"' out.jsonl
+          grep -q '"fix-page"' out.jsonl
+
+      - name: Scans a page with the bundled browser
+        run: |
+          mkdir -p site
+          echo '<!doctype html><html><head><title>t</title></head><body><img src="a.png"></body></html>' > site/index.html
+          (printf '%s\n' \
+            '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"1"}}}' \
+            '{"jsonrpc":"2.0","method":"notifications/initialized"}' \
+            '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"check_accessibility","arguments":{"url":"/site/index.html","keyboard":false}}}'; sleep 90) \
+            | timeout 120 docker run -i --rm -v "$PWD/site:/site:ro" accesslumens-mcp > scan.jsonl || true
+          grep -q 'Score:' scan.jsonl
+          grep -q 'image-alt' scan.jsonl
+          ! grep -q 'Downloading the scanning browser' scan.jsonl

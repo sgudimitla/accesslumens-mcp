@@ -52,7 +52,7 @@ Start your dev server, then run one of the ready-made workflows below, or just a
 
 ## Workflows (prompts)
 
-Ready-made instructions that tell your agent not just what is wrong but how to fix it well: in the source, native HTML before ARIA, shared causes fixed once, design and behaviour unchanged, and every fix verified by a rescan. They appear as slash commands, for example `/mcp__accesslumens__fix-all` in Claude Code and `/mcp.accesslumens.fix-all` in VS Code. Each takes an optional `url`; leave it empty and the agent finds your dev server.
+Ready-made instructions that tell your agent not just what is wrong but how to fix it well: in the source, native HTML before ARIA, shared causes fixed once, design and behaviour unchanged, and every fix verified by a rescan. In clients that support MCP prompts they appear as slash commands: in Claude Code, type `/` and pick `accesslumens:fix-all`. Each takes an optional `url`; leave it empty and the agent finds your dev server. Some clients, including some VS Code Copilot versions, do not list MCP prompts; there, just ask your agent to fix the accessibility issues on your page. The scanner's results carry the same guidance.
 
 | Prompt | What it does |
 | --- | --- |
@@ -64,7 +64,7 @@ Ready-made instructions that tell your agent not just what is wrong but how to f
 
 | Tool | What it does |
 | --- | --- |
-| `check_accessibility` | Scans a URL, localhost address or local `.html` file. Returns a 0-100 score and each issue with its severity, WCAG success criteria, who it affects, how to fix it, and every failing element's selector, markup and failure reason. Options: `keyboard` (default on), `crawl` (follow links, up to 10 pages), `max_issues` (default 30). |
+| `check_accessibility` | Scans a URL, localhost address or local `.html` file. Returns a 0-100 score and each issue with its severity, WCAG success criteria and how to fix it, and every failing element's selector, markup and failure reason (`explain_issue` adds who it affects). Options: `keyboard` (default on), `crawl` (follow links, up to 10 pages), `max_issues` (default 30). |
 | `explain_issue` | Explains a rule from a scan result: what it means, who it affects, how to fix it, and the WCAG criteria with W3C links. |
 
 ## Docker

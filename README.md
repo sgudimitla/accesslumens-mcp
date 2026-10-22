@@ -4,9 +4,11 @@
 
 Free accessibility checks for your AI coding agent. Ask it to scan the page you are building, and it gets back every WCAG problem with the exact element, the reason it fails and how to fix it. Then it fixes the code and scans again to confirm.
 
-It runs the same scanner as [accesslumens.com](https://accesslumens.com/?utm_source=github&utm_medium=readme): axe-core plus AccessLumens' own checks for things axe does not test, such as controls you cannot reach by keyboard, keyboard traps, invisible focus, reflow at 320px, and names a screen reader cannot tell apart (three identical "Add to cart" buttons, alt text that repeats the heading beside it, an aria-label that drops the visible words).
+It runs the same scanner as [accesslumens.com](https://accesslumens.com/accessibility-mcp-server?utm_source=github&utm_medium=readme): axe-core plus AccessLumens' own checks for things axe does not test, such as controls you cannot reach by keyboard, keyboard traps, invisible focus, reflow at 320px, and names a screen reader cannot tell apart (three identical "Add to cart" buttons, alt text that repeats the heading beside it, an aria-label that drops the visible words).
 
 Everything runs on your machine in a headless browser. It works on `localhost`, staging URLs, public sites and plain `.html` files. Nothing is sent to AccessLumens and no account or API key is needed.
+
+[Watch the 1-minute demo](https://youtu.be/kS0NEJZz0MU): Claude Code takes a page from 75 to 100, then axe DevTools confirms zero issues. Setup guide and FAQ: [accesslumens.com/mcp](https://accesslumens.com/mcp?utm_source=github&utm_medium=readme).
 
 ## Setup
 

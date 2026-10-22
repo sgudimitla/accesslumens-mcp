@@ -3,7 +3,7 @@
 # Keep the image tag on the same Playwright version the package depends on.
 FROM mcr.microsoft.com/playwright:v1.60.0-noble
 
-ARG ACCESSLUMENS_MCP_VERSION=0.1.1
+ARG ACCESSLUMENS_MCP_VERSION=0.1.2
 
 WORKDIR /app
 RUN npm init -y >/dev/null \

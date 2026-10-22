@@ -4,7 +4,7 @@
 
 Free accessibility checks for your AI coding agent. Ask it to scan the page you are building, and it gets back every WCAG problem with the exact element, the reason it fails and how to fix it. Then it fixes the code and scans again to confirm.
 
-It runs the same scanner as [accesslumens.com](https://accesslumens.com/?utm_source=github&utm_medium=readme): axe-core plus AccessLumens' own checks for things axe does not test, such as controls you cannot reach by keyboard, keyboard traps, invisible focus and reflow at 320px.
+It runs the same scanner as [accesslumens.com](https://accesslumens.com/?utm_source=github&utm_medium=readme): axe-core plus AccessLumens' own checks for things axe does not test, such as controls you cannot reach by keyboard, keyboard traps, invisible focus, reflow at 320px, and names a screen reader cannot tell apart (three identical "Add to cart" buttons, alt text that repeats the heading beside it, an aria-label that drops the visible words).
 
 Everything runs on your machine in a headless browser. It works on `localhost`, staging URLs, public sites and plain `.html` files. Nothing is sent to AccessLumens and no account or API key is needed.
 
@@ -82,6 +82,7 @@ A container cannot reach `localhost` on your machine by default. To scan a local
 
 - Automated testing finds roughly a third of WCAG issues. A clean scan is a good start, not proof of conformance. Issues marked "needs human review" need a person to confirm.
 - Sites behind bot protection (Cloudflare and similar) can block headless browsers. Scan a local or staging copy instead.
+- The very first start downloads the package and can take over 30 seconds, which some clients (Claude Code among them) treat as a failed connection. If the server shows as failed or stuck connecting the first time, reconnect it once (`/mcp` in Claude Code); later starts take a few seconds.
 - Set `ACCESSLUMENS_DEBUG=1` to log scanner detail to stderr.
 
 ## Full reports and PDFs

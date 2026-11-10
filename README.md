@@ -1,14 +1,12 @@
 # AccessLumens MCP server
 
-[![npm](https://img.shields.io/npm/v/@accesslumens/mcp)](https://www.npmjs.com/package/@accesslumens/mcp) [![MCP Registry](https://img.shields.io/badge/MCP%20Registry-com.accesslumens%2Fmcp-blue)](https://registry.modelcontextprotocol.io/v0.1/servers?search=com.accesslumens/mcp)
-
 Free accessibility checks for your AI coding agent. Ask it to scan the page you are building, and it gets back every WCAG problem with the exact element, the reason it fails and how to fix it. Then it fixes the code and scans again to confirm.
 
-It runs the same scanner as [accesslumens.com](https://accesslumens.com/accessibility-mcp-server?utm_source=github&utm_medium=readme): axe-core plus AccessLumens' own checks for things axe does not test, such as controls you cannot reach by keyboard, keyboard traps, invisible focus, reflow at 320px, and names a screen reader cannot tell apart (three identical "Add to cart" buttons, alt text that repeats the heading beside it, an aria-label that drops the visible words).
+It runs the same scanner as [accesslumens.com](https://accesslumens.com/accessibility-mcp-server?utm_source=npm&utm_medium=readme): axe-core plus AccessLumens' own checks for things axe does not test, such as controls you cannot reach by keyboard, keyboard traps, invisible focus, reflow at 320px, and names a screen reader cannot tell apart (three identical "Add to cart" buttons, alt text that repeats the heading beside it, an aria-label that drops the visible words).
 
-Everything runs on your machine in a headless browser. It works on `localhost`, staging URLs, public sites and plain `.html` files. Nothing is sent to AccessLumens and no account or API key is needed.
+Everything runs on your machine in a headless browser. It works on `localhost`, staging URLs, public sites and plain `.html` files. Web page scans send nothing to AccessLumens, and no account or API key is needed. Two tools are the exception, and only run when called: `check_pdf` uploads the PDFs you name to AccessLumens to check them, and `create_report` sends a public site's URL so AccessLumens can build a hosted report (see below).
 
-[Watch the 1-minute demo](https://youtu.be/kS0NEJZz0MU): Claude Code takes a page from 75 to 100, then axe DevTools confirms zero issues. Setup guide and FAQ: [accesslumens.com/mcp](https://accesslumens.com/mcp?utm_source=github&utm_medium=readme).
+[Watch the 1-minute demo](https://youtu.be/kS0NEJZz0MU): Claude Code takes a page from 75 to 100, then axe DevTools confirms zero issues. Setup guide and FAQ: [accesslumens.com/mcp](https://accesslumens.com/mcp?utm_source=npm&utm_medium=readme).
 
 ## Setup
 
@@ -67,18 +65,9 @@ Ready-made instructions that tell your agent not just what is wrong but how to f
 | Tool | What it does |
 | --- | --- |
 | `check_accessibility` | Scans a URL, localhost address or local `.html` file. Returns a 0-100 score and each issue with its severity, WCAG success criteria and how to fix it, and every failing element's selector, markup and failure reason (`explain_issue` adds who it affects). Options: `keyboard` (default on), `crawl` (follow links, up to 10 pages), `max_issues` (default 30). |
+| `check_pdf` | Checks a PDF (a local path, a folder of up to 10 PDFs such as `public/docs`, or a URL) against PDF/UA-1 with veraPDF, mapped to WCAG 2.2, plus colour contrast. Returns a 0-100 score, the failing WCAG criteria, the most severe issues and what an automatic repair would fix, with links to the full report and the repair. **Not local:** the file is uploaded to api.accesslumens.com. The file itself is not stored; the findings are, and can include short excerpts of its text. Up to 10 MB and 300 pages per file. Website scans also list the PDFs a page links to, since the page scan does not test them. |
+| `create_report` | Builds a hosted, shareable report for a deployed public site on accesslumens.com, with the accessibility laws that apply to the site's country, and returns its link. For when you need something to send a client or manager. Sends the site's URL to AccessLumens; it cannot reach localhost. |
 | `explain_issue` | Explains a rule from a scan result: what it means, who it affects, how to fix it, and the WCAG criteria with W3C links. |
-
-## Docker
-
-The image bundles Chromium, so it scans with no download:
-
-```sh
-docker build -t accesslumens-mcp .
-docker run -i --rm accesslumens-mcp
-```
-
-A container cannot reach `localhost` on your machine by default. To scan a local dev server from Docker, use `http://host.docker.internal:3000` (Docker Desktop) or run with `--network host` (Linux). For local work, `npx` is simpler.
 
 ## Good to know
 
@@ -89,12 +78,12 @@ A container cannot reach `localhost` on your machine by default. To scan a local
 
 ## Full reports and PDFs
 
-For a shareable report with your legal context (ADA, EAA, Section 508), multi-page journeys through signed-in flows, and PDF accessibility checks and repair, see [accesslumens.com](https://accesslumens.com/?utm_source=github&utm_medium=readme).
+For a shareable report with your legal context (ADA, EAA, Section 508), multi-page journeys through signed-in flows, and PDF accessibility checks and repair, see [accesslumens.com](https://accesslumens.com/?utm_source=npm&utm_medium=readme).
+
+## Learning accessibility
+
+Preparing for the IAAP WAS (Web Accessibility Specialist) exam? AccessLumens has [WAS exam prep](https://accesslumens.com/learn/was?utm_source=npm&utm_medium=readme) with 50 free questions.
 
 ## License
 
 Free to use, including commercially. Redistribution and resale are not permitted. See [LICENSE](LICENSE).
-
-## About this repository
-
-The server ships as the npm package [`@accesslumens/mcp`](https://www.npmjs.com/package/@accesslumens/mcp). This repository holds its directory listing (`server.json`, `glama.json`) and the Dockerfile, and is the place for questions, bug reports and feature requests: [open an issue](../../issues) or write to support@accesslumens.com.
